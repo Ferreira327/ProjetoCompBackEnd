@@ -4,28 +4,17 @@ import jwt from "jsonwebtoken";
 import crypto from 'crypto';
 import Mailer from '../modules/Mailer.js'
 
-async function hashSenha(senha) {
-    // Converte a senha para ArrayBuffer
-    const encoder = new TextEncoder();
-    const senhaBuffer = encoder.encode(senha);
-  
-    // Calcula o hash usando o algoritmo SHA-256
-    const hashBuffer = await crypto.subtle.digest('SHA-256', senhaBuffer);
-  
-    // Converte o ArrayBuffer para uma string hexadecimal
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    const hashHex = hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
-  
-    return hashHex;
-  }
 
+  
+  // Função para verificar uma senha em relação a um hash armazenado
   async function compararSenhas(senhaInserida, hashArmazenado) {
-    // Calcula o hash da senha inserida
-    const hashInserido = await hashSenha(senhaInserida);
+    // Cria um hash usando a senha inserida e o salt armazenado
+    const hashInserido = await crypto.createHash('sha256').update(senhaInserida).digest('hex');
   
     // Compara os hashes
     return hashInserido === hashArmazenado;
   }
+  
 
 
 const generateToken = params => {

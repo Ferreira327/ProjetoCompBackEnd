@@ -3,20 +3,14 @@ import mongoose from "mongoose";
 import crypto from 'crypto'
 
 async function hashSenha(senha) {
-    // Converte a senha para ArrayBuffer
-    const encoder = new TextEncoder();
-    const senhaBuffer = encoder.encode(senha);
+    // Gera um salt aleatório
+    //const salt = await crypto.randomBytes(16).toString('hex');
   
-    // Calcula o hash usando o algoritmo SHA-256
-    const hashBuffer = await crypto.subtle.digest('SHA-256', senhaBuffer);
+    // Cria um hash usando o algoritmo sha256 e o salt
+    const hash = await crypto.createHash('sha256').update(senha).digest('hex');
   
-    // Converte o ArrayBuffer para uma string hexadecimal
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    const hashHex = hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
-  
-    return hashHex;
+    return hash;
   }
-
 
 //configura um model
 
@@ -50,7 +44,7 @@ const Enfermeiroschema = new mongoose.Schema({
 );
 
 Enfermeiroschema.pre('save', function(next){
-    hashSenha(this.senha,10).then(hash => {
+    hashSenha(this.senha).then(hash => {
         this.senha = hash;
         next();
     }).catch(error => {console.error("Error hashing password", error)})
