@@ -2,6 +2,7 @@ import {Enfermeiros} from "../Models/Enfermeiros.js";
 import jwt from "jsonwebtoken";
 import crypto from 'crypto';
 import Mailer from '../modules/Mailer.js'
+import authconfig from '../../config/auth.js'
 
   
   // Função para verificar uma senha em relação a um hash armazenado
@@ -14,17 +15,16 @@ import Mailer from '../modules/Mailer.js'
   }
   
 
-
 const generateToken = params => {
 
-    return jwt.sign(params,process.env.TK_CONECTION_LOGIN,{expiresIn: 86400})
+    return jwt.sign(params,authconfig.secret,{expiresIn: 86400})
     
 }
 
 
 class loginController{
 
-    static  fazerLogin (req,res){
+    static  fazerLogin(req,res){
         const {usuario, senha} = req.body
         try{
          Enfermeiros.findOne({usuario}).select("+senha")
