@@ -1,11 +1,8 @@
 import mongoose from "mongoose";
-//import bcrypt, { hashSync } from "bcryptjs"
 import crypto from 'crypto'
 
 async function hashSenha(senha) {
-    // Gera um salt aleatório
-    //const salt = await crypto.randomBytes(16).toString('hex');
-  
+
     // Cria um hash usando o algoritmo sha256 e o salt
     const hash = await crypto.createHash('sha256').update(senha).digest('hex');
   
@@ -38,7 +35,7 @@ const Enfermeiroschema = new mongoose.Schema({
         type: String
     },
     passwordResetTokenExpiration:{
-        type: String
+        type: Date
     }
 }, {versionKey: false}
 );

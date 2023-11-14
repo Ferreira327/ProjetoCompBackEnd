@@ -22,5 +22,5 @@ routes(app);
 
 //Executar Servidor
 
-app.listen(9334, () => {console.log("Servidor rodando");});
+app.listen(9350, () => {console.log("Servidor rodando");});
 

@@ -1,9 +1,7 @@
 import {Enfermeiros} from "../Models/Enfermeiros.js";
-//import bcrypt from 'bcryptjs'
 import jwt from "jsonwebtoken";
 import crypto from 'crypto';
 import Mailer from '../modules/Mailer.js'
-
 
   
   // Função para verificar uma senha em relação a um hash armazenado
@@ -87,17 +85,17 @@ class loginController{
             const usuario = req.body.usuario;
             const email = req.body.email;
 
-            Enfermeiros.findOne({usuario}).then(user => {
+        Enfermeiros.findOne({usuario}).then(user => {
                 if(user){
                     const token = crypto.randomBytes(20).toString('hex');
                     const expiration = new Date();
                     expiration.setHours(new Date().getHours()+3);
-
-                    Enfermeiros.findByIdAndUpdate(user.id,{
+                    
+                    
+                    Enfermeiros.findByIdAndUpdate(user._id,{
                         $set:{
                             passwordResetToken: token,
-                            passwordResetTokenExpiration: expiration
-                        }
+                            passwordResetTokenExpiration: expiration}
                     }).then(() => {
                         Mailer.sendMail({
                             to: email,
@@ -130,6 +128,40 @@ class loginController{
             }).catch(error => {
                 res.status(500).json({message:`${error.message} - Erro no forgotPassword`});
             })
+        }
+
+        static resetarSenha(req,res){
+            const {usuario, novaSenha, token} = req.body;
+
+            Enfermeiros.findOne({usuario}).then(user =>{
+                if(user){
+                    if(token != user.passwordResetToken || Date.now() > user.passwordResetTokenExpiration){
+                        return res.status(400).send("Error invalid Token")
+                    }
+                    else{
+                        user.passwordResetToken = undefined;
+                        user.passwordResetTokenExpiration = undefined;
+                        user.senha = novaSenha;
+
+                        user.save().then(() => {
+                            res.send({message:"Senha trocada com sucesso!"})
+
+                        }).catch(error=>{
+                            console.error('Erro ao salvar senha do usuario', error);
+                            
+                        });
+                    }
+                }
+                else{
+                    return res.status(404).send({error:"User not found"})
+                }
+ 
+            }).catch(error =>{
+                res.status(500).json({message:`${error.message} - Erro no Forgot Password`});
+                return res.status(500).send({error: 'Internal server error'});
+
+            })
+
         }
 
 
