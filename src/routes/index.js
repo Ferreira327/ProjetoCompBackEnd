@@ -12,6 +12,7 @@ const routes  =  (app) =>{
         res.status(200).send("Bem-Vindo(a)!");
     })
 
+    app.use(express.static('../../FrontEnd/index.html'));
     app.use(express.json(), enfermeiros);
     app.use(express.json(), pacientes);
     app.use(express.json(), login);

@@ -3,6 +3,11 @@ import jwt from "jsonwebtoken";
 import crypto from 'crypto';
 import Mailer from '../modules/Mailer.js'
 import authconfig from '../../config/auth.js'
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
   
   // Função para verificar uma senha em relação a um hash armazenado
@@ -24,12 +29,17 @@ const generateToken = params => {
 
 class loginController{
 
+
+    static formulario(req,res){
+    const formularioPath = new URL('../../FrontEnd/index.html', import.meta.url).pathname;
+    res.sendFile(formularioPath);
+    }
+
     static  fazerLogin(req,res){
         const {usuario, senha} = req.body
         try{
          Enfermeiros.findOne({usuario}).select("+senha")
         .then(user=>{
-
             if(user){
                 compararSenhas(senha,user.senha).then(result=>{
                     if(result){

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+
+        h2 {
+            text-align: start;
+            color: #060505;
+        }
+
+        form {
+            background-color: rgba(170, 170, 170, 0.8);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            max-width: 450px;
+            width: 100%;
+            text-align: center;
+        }
+
+
+        label, input, button {
+            display: block;
+            margin: 10px 0;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #errorDisplay {
+            color: #FF0000;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h2>Enfermaria</h2>
+    <form id="loginForm">
+        <label for="username">Usuario:</label>
+        <input type="text" id="username" name="username" placeholder="Digite seu usuário" required>
+        
+        <label for="password">Senha:</label>
+        <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
+
+        <button type="button" onclick="submitForm()">Login</button>
+    </form>
+
+    <!-- Exibir a mensagem de erro na página -->
+    <p id="errorDisplay"></p>
+
+    <script>
+        async function submitForm() {
+            console.log('Função submitForm chamada.');
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                // Enviar os dados para o backend
+                const response = await fetch('/fazerLogin', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ usuario: username, senha: password }),
+                });
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(`Erro: ${response.status} - ${response.statusText}\n${errorText}`);
+                }
+
+                const data = await response.json();
+
+                if (data.token) {
+                    // Exibir o token na página
+                    document.getElementById('errorDisplay').innerText = `Token: ${data.token}`;
+                } else {
+                    // Limpar o token e exibir mensagem de erro
+                    document.getElementById('errorDisplay').innerText = 'Erro de autenticação';
+                }
+
+            } catch (error) {
+                console.error('Erro:', error);
+                // Exibir mensagem de erro em caso de falha na requisição
+                document.getElementById('errorDisplay').innerText = error.message;
+            }
+        }
+    </script>
+</body>
+</html>
