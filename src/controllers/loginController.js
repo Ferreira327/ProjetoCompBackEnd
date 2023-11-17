@@ -10,12 +10,10 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
   
-  // Função para verificar uma senha em relação a um hash armazenado
+
   async function compararSenhas(senhaInserida, hashArmazenado) {
-    // Cria um hash usando a senha inserida e o salt armazenado
     const hashInserido = await crypto.createHash('sha256').update(senhaInserida).digest('hex');
-  
-    // Compara os hashes
+
     return hashInserido === hashArmazenado;
   }
   
