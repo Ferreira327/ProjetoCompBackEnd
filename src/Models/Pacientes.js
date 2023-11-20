@@ -22,7 +22,7 @@ const pacientesSchema = new mongoose.Schema({
     }
     ,
     toma_soro:{
-        type: Array
+        type: Boolean
     }
 }, {versionKey: false}
 );

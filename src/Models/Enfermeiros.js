@@ -16,10 +16,12 @@ const Enfermeiroschema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId
     },
     usuario:{
-        type: String
+        type: String,
+        select: false
     },
     senha:{
-        type: String
+        type: String,
+        select: false
     },
     nome: {
         type: String,

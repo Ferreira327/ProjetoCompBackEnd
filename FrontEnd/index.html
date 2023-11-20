@@ -89,6 +89,8 @@
                 if (data.token) {
                     // Exibir o token na página
                     document.getElementById('errorDisplay').innerText = `Token: ${data.token}`;
+                    localStorage.setItem('token', data.token);
+
                 } else {
                     // Limpar o token e exibir mensagem de erro
                     document.getElementById('errorDisplay').innerText = 'Erro de autenticação';
