@@ -30,7 +30,7 @@ class PacientesController{
             const enfermeiraEncontrada = await Enfermeiros.findById(novoPaciente.enfermeiro_enfermeira_atendimento)
             const PacienteCompleto = {...novoPaciente,enfermeiro_enfermeira_atendimento:{...enfermeiraEncontrada._doc}}
             const PacienteCriado = await Pacientes.create(PacienteCompleto)
-            res.status(201).json({message: "Criado com sucesso!", Enfermeiros: PacienteCompleto})          // manejo de erros e sucessos
+            res.status(201).json({message: "Criado com sucesso!", Paciente: PacienteCompleto})          // manejo de erros e sucessos
         }catch(erro){
             res.status(500).json({message:`${erro.message} - Falha ao cadastrar Paciente`});
             }
