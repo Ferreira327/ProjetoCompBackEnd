@@ -25,17 +25,18 @@ class PacientesController{
 
 
     static async cadastrarPacientes (req,res){
-        const novoPaciente = req.body
+        const novoPaciente = req.body;
         try{
-            const enfermeiraEncontrada = await Enfermeiros.findById(novoPaciente.enfermeiro_enfermeira_atendimento)
-            const PacienteCompleto = {...novoPaciente,enfermeiro_enfermeira_atendimento:{...enfermeiraEncontrada._doc}}
+            await Enfermeiros.findById(novoPaciente.enfermeiro_enfermeira_atendimento).then(async(enfermeiraEncontrada)=>{const PacienteCompleto = {...novoPaciente,enfermeiro_enfermeira_atendimento:{...enfermeiraEncontrada._doc}}
             const PacienteCriado = await Pacientes.create(PacienteCompleto)
-            res.status(201).json({message: "Criado com sucesso!", Paciente: PacienteCompleto})          // manejo de erros e sucessos
-        }catch(erro){
+            res.status(201).json({message: "Criado com sucesso!", Paciente: PacienteCriado})}).catch(() => {
+                res.status(400).json({message:" Falha ao cadastrar paciente, Enfermeiro(a) não encontrado!"})
+            })
+            }
+        catch(erro){
             res.status(500).json({message:`${erro.message} - Falha ao cadastrar Paciente`});
             }
     }
-
 
     static async atualizarPacientes (req,res){
         try{

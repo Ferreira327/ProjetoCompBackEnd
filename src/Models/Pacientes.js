@@ -12,17 +12,17 @@ const pacientesSchema = new mongoose.Schema({
         type: String,
     },
     idade:{
-        type: Number
+        type: Number,
     },
     enfermeiro_enfermeira_atendimento:{
         type: Enfermeiroschema
     },
     remedios:{
-        type: Array
+        type: Array,
     }
     ,
     toma_soro:{
-        type: Boolean
+        type: Boolean,
     }
 }, {versionKey: false}
 );

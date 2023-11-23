@@ -16,12 +16,10 @@ const Enfermeiroschema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId
     },
     usuario:{
-        type: String,
-        select: false
+        type: String
     },
     senha:{
-        type: String,
-        select: false
+        type: String
     },
     nome: {
         type: String,
@@ -35,9 +33,11 @@ const Enfermeiroschema = new mongoose.Schema({
     },
     passwordResetToken:{
         type: String
+        
     },
     passwordResetTokenExpiration:{
         type: Date
+        
     }
 }, {versionKey: false}
 );
