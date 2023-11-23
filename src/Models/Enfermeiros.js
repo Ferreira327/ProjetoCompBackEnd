@@ -1,54 +1,57 @@
 import mongoose from "mongoose";
-import crypto from 'crypto'
+import crypto from "crypto";
 
 async function hashSenha(senha) {
+  // Cria um hash usando o algoritmo sha256 e o salt
+  const hash = await crypto.createHash("sha256").update(senha).digest("hex");
 
-    // Cria um hash usando o algoritmo sha256 e o salt
-    const hash = await crypto.createHash('sha256').update(senha).digest('hex');
-  
-    return hash;
-  }
+  return hash;
+}
 
 //configura um model
 
-const Enfermeiroschema = new mongoose.Schema({
-    id:{
-        type: mongoose.Schema.Types.ObjectId
+const Enfermeiroschema = new mongoose.Schema(
+  {
+    id: {
+      type: mongoose.Schema.Types.ObjectId,
     },
-    usuario:{
-        type: String
+    usuario: {
+      type: String,
     },
-    senha:{
-        type: String
+    senha: {
+      type: String,
     },
     nome: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
-    especialidade:{
-        type: String
+    especialidade: {
+      type: String,
     },
-    turno:{
-        type: String
+    turno: {
+      type: String,
     },
-    passwordResetToken:{
-        type: String
-        
+    passwordResetToken: {
+      type: String,
     },
-    passwordResetTokenExpiration:{
-        type: Date
-        
-    }
-}, {versionKey: false}
+    passwordResetTokenExpiration: {
+      type: Date,
+    },
+  },
+  { versionKey: false }
 );
 
-Enfermeiroschema.pre('save', function(next){
-    hashSenha(this.senha).then(hash => {
-        this.senha = hash;
-        next();
-    }).catch(error => {console.error("Error hashing password", error)})
-})
+Enfermeiroschema.pre("save", function (next) {
+  hashSenha(this.senha)
+    .then((hash) => {
+      this.senha = hash;
+      next();
+    })
+    .catch((error) => {
+      console.error("Error hashing password", error);
+    });
+});
 
-const Enfermeiros = mongoose.model("enfermeiros",Enfermeiroschema); // (colecão criada no mongoDb Atlas, modelo criado acima)
+const Enfermeiros = mongoose.model("enfermeiros", Enfermeiroschema); // (colecão criada no mongoDb Atlas, modelo criado acima)
 
-export {Enfermeiroschema, Enfermeiros};
+export { Enfermeiroschema, Enfermeiros };
