@@ -29,7 +29,7 @@ class LivroController {
       const novoLivro = await Enfermeiros.create(req.body);
       res
         .status(201)
-        .json({ message: "Criado com sucesso!", Enfermeiros: novoLivro }); // manejo de erros e sucessos
+        .json({ message: "Criado com sucesso!", Enfermeiros: novoLivro });
     } catch (erro) {
       res
         .status(500)

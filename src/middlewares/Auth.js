@@ -21,6 +21,7 @@ export default (req, res, next) => {
         return res.status(401).send({ error: "No valid token provided" });
       } else {
         req.uid = decoded.uid;
+        req.enf_admin = decoded.isAdmin;
         return next();
       }
     });

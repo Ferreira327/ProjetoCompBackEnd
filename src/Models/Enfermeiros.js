@@ -20,6 +20,7 @@ const Enfermeiroschema = new mongoose.Schema(
     },
     senha: {
       type: String,
+      select: false,
     },
     nome: {
       type: String,
@@ -36,6 +37,11 @@ const Enfermeiroschema = new mongoose.Schema(
     },
     passwordResetTokenExpiration: {
       type: Date,
+    },
+    isAdmin: {
+      type: Boolean,
+      default: false,
+      select: false,
     },
   },
   { versionKey: false }

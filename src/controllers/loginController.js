@@ -39,7 +39,10 @@ class loginController {
             compararSenhas(senha, user.senha)
               .then((result) => {
                 if (result) {
-                  const token = generateToken({ uid: user.id });
+                  const token = generateToken({
+                    uid: user.id,
+                    isAdmin: user.isAdmin,
+                  });
                   return res.send({ token: token, tokenExpiration: "1d" });
                 } else {
                   return res.status(400).send("Senha Invalida");
