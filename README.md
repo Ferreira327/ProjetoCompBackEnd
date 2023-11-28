@@ -4,9 +4,15 @@
 
 ## Apresentação
 
+<body>
     O Paci-Info é um sistema que tem por objetivo gerenciar o trabalho de um enfermeiro em um hospital, de forma organizada e segura. Pense em um gigantesco hospital com diversos pacientes e com uma vasta unicidade, ou seja, onde cada pessoa possui condições específicas de tratamento. Você não acha provável, com anotações físicas sobre cada paciente, a ocorrência de um erro ou demora no atendimento?
+</body>
+<head>
 
+</head>
+<body>
     Essa API tem justamente a função de direcionar corretamente o trabalho dos enfermeiros(as) durante um turno no Hospital.
+</body>
 
 ## Como usufruir do projeto?
 
