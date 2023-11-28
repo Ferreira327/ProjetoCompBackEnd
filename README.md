@@ -8,8 +8,22 @@
 
     Essa API tem justamente a função de direcionar corretamente o trabalho dos enfermeiros(as) durante um turno no Hospital.
 
-## Como executar o projeto?
+## Como usufruir do projeto?
 
-### -npm install nodemon
+### Instale dependencias
 
-### -npm run dev
+#### -npm install nodemon
+
+### Execute o projeto
+
+#### -npm run dev
+
+### Usando a API
+
+#### Para se registrar como enfermeiro basta entrar na rota "/register" e colocar as seguintes informações:
+
+    * usuario
+    * senha
+    * nome
+    * especialidade
+    * turno
