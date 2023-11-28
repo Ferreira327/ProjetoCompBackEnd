@@ -18,7 +18,7 @@
 
 ### Instale dependencias
 
-#### -npm install nodemon
+#### -npm install
 
 ### Execute o projeto
 
@@ -33,3 +33,14 @@
     * nome
     * especialidade
     * turno
+
+#### Para fazer login, basta ir na rota "fazerLogin" e digitar os campos:
+
+    * usuario
+    * senha
+
+<br>
+
+<body>
+   <b>É Necessário lembrar que para ver todos enfermeiros, modificar e deletar é preciso ser um usuário administrador</b>
+</body>
