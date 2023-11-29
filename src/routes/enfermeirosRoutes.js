@@ -5,12 +5,7 @@ import authmd from "../middlewares/Auth.js";
 
 const routes = express.Router();
 
-routes.get(
-  "/enfermeiros",
-  authmd,
-  adminRoute,
-  EnfermeiroControler.listarEnfermeiros
-);
+routes.get("/enfermeiros", authmd, EnfermeiroControler.listarEnfermeiros);
 routes.get(
   "/enfermeiros/:id",
   authmd,

@@ -29,6 +29,7 @@ class PacientesController {
     const novoPaciente = req.body;
     try {
       await Enfermeiros.findById(novoPaciente.enfermeiro_enfermeira_atendimento)
+        .select("+senha")
         .then(async (enfermeiraEncontrada) => {
           const PacienteCompleto = {
             ...novoPaciente,

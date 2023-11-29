@@ -28,19 +28,44 @@
 
 #### Para se registrar como enfermeiro basta entrar na rota "/register" e colocar as seguintes informações:
 
-    * usuario
-    * senha
-    * nome
-    * especialidade
-    * turno
+<ul>
+<li>usuario</li>
+<li>senha</li>
+<li>nome</li>
+<li>especialidade</li>
+<li>turno</li>
+</ul>
 
 #### Para fazer login, basta ir na rota "fazerLogin" e digitar os campos:
 
-    * usuario
-    * senha
-
+   <ul>
+<li>usuario</li>
+<li>senha</li>
+</ul>
 <br>
 
 <body>
-   <b>É Necessário lembrar que para ver todos enfermeiros, modificar e deletar é preciso ser um usuário administrador</b>
+   <b> <font color="#ff0000">Aviso:</font> É Necessário lembrar que para modificar e deletar os enfermeiros é preciso ser um usuário administrador</</b>
 </body>
+
+#### Depois de efetuado o login como enfermeiro, basta acessar a rota "pacientes" e usufruir das ferramentas de remoção, modificação, criação e observação dos pacientes.
+
+##### <font color="#0000ff">Todo paciente deverá ser cadastrado com um enfermeiro(a)!</font>
+
+### As informações para cadastro do paciente são:
+
+<ul>
+<li>nome</li>
+<li>idade</li>
+<li>enfermeiro_enfermeira_atendimento</li>
+<li>remedios</li>
+<li>toma_soro</li>
+</ul>
+
+### E se você esquecer a senha? Não tem problema, a API foi construída com a ferramente de recuperação de senha!
+
+<ul>
+ <li>Basta entrar na rota "/recuperarSenha" e enviar seu usuário</li>
+ <li>Ir na ferramenta e pegar o token de recuperação</li>
+ <li>Acessar a rota "/resetarSenha" e enviar os seguintes dados: <ul><li>usuario</li><li>novaSenha</li><li> token</li></ul> </li>
+ </ul>
