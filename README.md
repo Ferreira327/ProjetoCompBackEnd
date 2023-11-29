@@ -45,7 +45,7 @@
 <br>
 
 <body>
-   <b> <font color="#ff0000">Aviso:</font> É Necessário lembrar que para modificar e deletar os enfermeiros é preciso ser um usuário administrador</</b>
+   <b> <font color="#ff0000">Aviso:</font> É Necessário lembrar que para modificar e deletar os enfermeiros é preciso ser um usuário administrador</b>
 </body>
 
 #### Depois de efetuado o login como enfermeiro, basta acessar a rota "pacientes" e usufruir das ferramentas de remoção, modificação, criação e observação dos pacientes.
