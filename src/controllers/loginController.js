@@ -89,6 +89,7 @@ class loginController {
 
   static esqueceuSenha(req, res) {
     const usuario = req.body.usuario;
+    const email = req.body.email;
 
     Enfermeiros.findOne({ usuario })
       .then((user) => {
@@ -106,7 +107,7 @@ class loginController {
             .then(() => {
               Mailer.sendMail(
                 {
-                  to: usuario,
+                  to: email,
                   from: "webmaster@testeexpress.com",
                   template: "auth/forgot_password",
                   context: { token },
