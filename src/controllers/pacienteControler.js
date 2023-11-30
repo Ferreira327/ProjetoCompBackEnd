@@ -57,7 +57,7 @@ class PacientesController {
     try {
       const id = req.params.id;
       await Pacientes.findByIdAndUpdate(id, req.body);
-      res.status(200).json({ message: "Enfermeiro(a) atualizado!" });
+      res.status(200).json({ message: "Paciente atualizado!" });
     } catch (erro) {
       res.status(500).json({
         message: `${erro.message} - Falha na atualização das informações do Paciente`,

@@ -10,6 +10,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 async function compararSenhas(senhaInserida, hashArmazenado) {
+  // Função para comparar senhas em que foi feito o Hash
   const hashInserido = await crypto
     .createHash("sha256")
     .update(senhaInserida)
@@ -19,22 +20,25 @@ async function compararSenhas(senhaInserida, hashArmazenado) {
 }
 
 const generateToken = (params) => {
+  //Gera um token que expira em um dia
   return jwt.sign(params, authconfig.secret, { expiresIn: 86400 });
 };
 
 class loginController {
   static formulario(req, res) {
+    // Front end, pagina de Login
     const formularioPath = new URL("../../FrontEnd/index.html", import.meta.url)
       .pathname;
     res.sendFile(formularioPath);
   }
 
   static fazerLogin(req, res) {
+    // para a rota post do login, Receber os dados do Usuário
     const { usuario, senha } = req.body;
     try {
       Enfermeiros.findOne({ usuario })
-        .select("+senha")
-        .select("isAdmin")
+        .select("+senha") // inclui senha, pois no model o select está False
+        .select("isAdmin") // inclui isAdmin pois ele está falso no model
         .then((user) => {
           if (user) {
             compararSenhas(senha, user.senha)
@@ -66,7 +70,7 @@ class loginController {
     const usuario = req.body.usuario;
     const senha = req.body.senha;
 
-    Enfermeiros.findOne({ usuario })
+    Enfermeiros.findOne({ usuario }) // procura para ver se o usuário já existe
       .then((UserData) => {
         if (UserData) {
           return res.status(400).send({ error: "Usuario já existe!" });

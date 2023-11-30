@@ -1,4 +1,3 @@
-export default{
-
-    secret: "folad=-dfjoisa-jdomaklrwórkeqwḱewpqokekqẃeqwḱepwq"
-}
+export default {
+  secret: "folad=-dfjoisa-jdomaklrwórkeqwḱewpqokekqẃeqwḱepwq",
+};

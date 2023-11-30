@@ -1,9 +1,9 @@
 import { Enfermeiros } from "../Models/Enfermeiros.js";
 
-class LivroController {
+class EnfermeiroController {
   static async listarEnfermeiros(req, res) {
     try {
-      const ListaE = await Enfermeiros.find({});
+      const ListaE = await Enfermeiros.find({}); // Procura por todos os Enfermeiros
       res.status(200).json(ListaE);
     } catch (erro) {
       res.status(500).json({
@@ -15,7 +15,7 @@ class LivroController {
   static async listarEnfermeirosPorId(req, res) {
     try {
       const id = req.params.id;
-      const LivroE = await Enfermeiros.findById(id);
+      const LivroE = await Enfermeiros.findById(id); //Procura o enfermeiro pelo id
       res.status(200).json(LivroE);
     } catch (erro) {
       res
@@ -26,10 +26,10 @@ class LivroController {
 
   static async cadastrarEnfermeiro(req, res) {
     try {
-      const novoLivro = await Enfermeiros.create(req.body);
+      const novoEnfermeiro = await Enfermeiros.create(req.body); // Cria novo Enfermeiro no Banco
       res
         .status(201)
-        .json({ message: "Criado com sucesso!", Enfermeiros: novoLivro });
+        .json({ message: "Criado com sucesso!", Enfermeiros: novoEnfermeiro });
     } catch (erro) {
       res
         .status(500)
@@ -62,4 +62,4 @@ class LivroController {
   }
 }
 
-export default LivroController;
+export default EnfermeiroController;

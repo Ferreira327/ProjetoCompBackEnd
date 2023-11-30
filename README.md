@@ -65,7 +65,7 @@
 ### E se você esquecer a senha? Não tem problema, a API foi construída com a ferramente de recuperação de senha!
 
 <ul>
- <li>Basta entrar na rota "/recuperarSenha" e enviar seu usuário</li>
+ <li>Basta entrar na rota "/recuperarSenha" e enviar seu usuário e email</li>
  <li>Ir na ferramenta e pegar o token de recuperação</li>
  <li>Acessar a rota "/resetarSenha" e enviar os seguintes dados: <ul><li>usuario</li><li>novaSenha</li><li> token</li></ul> </li>
  </ul>
