@@ -70,5 +70,4 @@
  <li>Acessar a rota "/resetarSenha" e enviar os seguintes dados: <ul><li>usuario</li><li>novaSenha</li><li> token</li></ul> </li>
  </ul>
 
-
 #### Admin : usuario-> enfermeiro01 senha->eugostodecafe
